@@ -1,0 +1,9 @@
+# .codex/config.example.toml
+# Optional repo-specific Codex config example.
+# Copy to ~/.codex/config.toml or project-specific Codex config only if you know what you are changing.
+
+# Keep Codex from truncating project guidance too aggressively if you add more local docs.
+project_doc_max_bytes = 65536
+
+# Keep this repo instruction filename standard.
+project_doc_fallback_filenames = ["AGENTS.md"]

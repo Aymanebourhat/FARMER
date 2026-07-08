@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+.next/
+out/
+dist/
+.npm/
+
+# Uploads and local storage
+uploads/
+*.sqlite3
+*.db
+
+# Logs
+*.log
+.codex-log/
+
+# OS
+.DS_Store
+Thumbs.db
