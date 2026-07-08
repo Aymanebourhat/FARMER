@@ -3,20 +3,20 @@ from uuid import UUID
 
 import jwt
 from jwt import InvalidTokenError
-from passlib.context import CryptContext
+from pwdlib import PasswordHash
 
 from app.core.config import get_settings
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+password_hash = PasswordHash.recommended()
 
 
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    return password_hash.hash(password)
 
 
-def verify_password(password: str, password_hash: str) -> bool:
-    return pwd_context.verify(password, password_hash)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return password_hash.verify(plain_password, hashed_password)
 
 
 def create_access_token(user_id: UUID) -> str:
@@ -50,3 +50,4 @@ def decode_access_token(token: str) -> dict[str, object]:
     if payload.get("type") != "access":
         raise ValueError("Invalid token type")
     return payload
+
