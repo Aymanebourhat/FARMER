@@ -1,0 +1,6 @@
+{
+  "name": "FellahLink",
+  "description": "Système de gestion de bétail pour les éleveurs marocains - Suivi des animaux, de la croissance, de la santé et marché en ligne.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

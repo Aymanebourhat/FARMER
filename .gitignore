@@ -12,6 +12,7 @@ node_modules/
 out/
 dist/
 .npm/
+*.tsbuildinfo
 
 # Uploads and local storage
 uploads/
@@ -25,3 +26,4 @@ uploads/
 # OS
 .DS_Store
 Thumbs.db
+
