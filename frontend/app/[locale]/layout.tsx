@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getDictionary, isLocale, locales } from "@/lib/i18n";
+import { getDictionary, isLocale, isRtlLocale, locales } from "@/lib/i18n";
 
 import "./globals.css";
 
@@ -42,7 +42,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} dir={locale === "fr" ? "ltr" : "rtl"}>
+    <html lang={locale} dir={isRtlLocale(locale) ? "rtl" : "ltr"}>
       <body>{children}</body>
     </html>
   );

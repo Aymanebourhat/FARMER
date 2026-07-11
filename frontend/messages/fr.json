@@ -23,6 +23,7 @@
   "header": {
     "features": "Fonctionnalités",
     "dashboard": "Tableau de bord",
+    "animals": "Animaux",
     "profile": "Profil",
     "login": "Connexion",
     "register": "Créer un compte",
@@ -30,6 +31,7 @@
     "arabic": "العربية",
     "darija": "الدارجة المغربية",
     "french": "Français",
+    "english": "English",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu"
   },
@@ -147,6 +149,82 @@
     "informationCardText": "Le score de complétion vient de l'API et n'est pas inventé par l'interface.",
     "edit": "Modifier l'exploitation",
     "lastUpdated": "Dernière mise à jour"
+  },
+  "animals": {
+    "title": "Registre du cheptel",
+    "description": "Enregistrez et tenez à jour les animaux de votre exploitation.",
+    "addAnimal": "Ajouter un animal",
+    "loadingList": "Chargement de vos animaux...",
+    "emptyTitle": "Aucun animal enregistré",
+    "emptyDescription": "Ajoutez votre premier animal pour suivre son identité, sa croissance, ses photos et sa santé.",
+    "failedLoad": "Impossible de charger votre registre d'élevage.",
+    "forbiddenTitle": "Accès agriculteur requis",
+    "forbiddenDescription": "Seuls les comptes agriculteur peuvent gérer le registre du cheptel.",
+    "missingTitle": "Animal introuvable",
+    "missingDescription": "Cet animal n'existe pas ou n'est pas accessible à ce compte.",
+    "viewAnimal": "Voir l'animal",
+    "imageAlt": "Photo de {animal}",
+    "noPhoto": "Aucune photo",
+    "ageExact": "Né le {date}",
+    "ageEstimated": "Environ {months} mois",
+    "tabs": { "label": "Sections de l'animal", "overview": "Aperçu", "growth": "Croissance", "health": "Santé" },
+    "values": {
+      "sheep": "Mouton", "cow": "Vache", "goat": "Chèvre", "camel": "Chameau", "other": "Autre",
+      "male": "Mâle", "female": "Femelle", "unknown": "Inconnu",
+      "healthy": "En bonne santé", "sick": "Malade", "recovering": "En rétablissement",
+      "owned": "Possédé", "listed": "Publié", "reserved": "Réservé", "sold": "Vendu", "dead": "Décédé",
+      "not_ready": "Pas prêt", "ready": "Prêt",
+      "self_reported": "Déclaré par l'agriculteur", "admin_reviewed": "Examiné par l'administration", "vet_verified": "Vérifié par un vétérinaire",
+      "farmer_reported": "Déclaré par l'agriculteur",
+      "vaccine": "Vaccination", "illness": "Maladie", "treatment": "Traitement", "checkup": "Contrôle", "note": "Note générale",
+      "animal_created": "Animal enregistré", "weight_recorded": "Poids enregistré", "health_recorded": "Dossier de santé ajouté", "photo_uploaded": "Photo ajoutée"
+    },
+    "form": {
+      "createTitle": "Ajouter un animal", "editTitle": "Modifier l'animal", "subtitle": "Utilisez les informations réelles de l'animal. Les champs obligatoires sont validés avant l'enregistrement.",
+      "species": "Espèce", "breed": "Race", "sex": "Sexe", "ageMethod": "Comment connaissez-vous l'âge ?", "exactDate": "Date de naissance exacte", "estimatedAge": "Âge estimé",
+      "birthDate": "Date de naissance", "ageMonths": "Âge estimé en mois", "color": "Couleur", "healthStatus": "État de santé", "saleReadiness": "Prêt à la vente", "notes": "Notes d'identification",
+      "create": "Créer l'animal", "creating": "Création...", "save": "Enregistrer les modifications", "saving": "Enregistrement...", "cancel": "Annuler",
+      "positive": "Saisissez un nombre entier supérieur à zéro.", "futureDate": "La date ne peut pas être future.", "chooseAge": "Renseignez l'information d'âge sélectionnée.",
+      "createSuccess": "Animal créé avec succès.", "updateSuccess": "Animal mis à jour.", "generalError": "Impossible d'enregistrer l'animal.",
+      "breedPlaceholder": "Par exemple, Sardi", "colorPlaceholder": "Par exemple, blanc avec une marque noire", "notesPlaceholder": "Marques visibles ou détails privés d'identification"
+    },
+    "detail": {
+      "back": "Retour aux animaux", "edit": "Modifier", "archive": "Archiver l'animal", "identity": "Identité et statut", "species": "Espèce", "breed": "Race", "sex": "Sexe",
+      "birthDate": "Date de naissance", "estimatedAge": "Âge estimé", "months": "{count} mois", "color": "Couleur", "healthStatus": "État de santé", "ownershipStatus": "Statut de propriété",
+      "saleReadiness": "Prêt à la vente", "verification": "Vérification", "notes": "Notes d'identification", "created": "Enregistré", "updated": "Dernière mise à jour", "notProvided": "Non renseigné",
+      "archiveTitle": "Archiver cet animal ?", "archiveDescription": "Archiver {animal}. Il sera retiré du registre actif et sa fiche ne sera plus accessible.",
+      "archiveConfirm": "Archiver l'animal", "archiving": "Archivage...", "archiveSuccess": "Animal archivé.", "archiveError": "Impossible d'archiver l'animal."
+    },
+    "photos": {
+      "title": "Photos de l'animal", "count": "{count} sur 5 photos", "loading": "Chargement des photos...", "emptyTitle": "Aucune photo", "emptyDescription": "Ajoutez une photo nette au format JPEG, PNG ou WebP.",
+      "select": "Choisir une photo", "replace": "Choisir une autre", "preview": "Aperçu de la photo sélectionnée", "upload": "Ajouter la photo", "uploading": "Envoi et optimisation de la photo...",
+      "supported": "JPEG, PNG ou WebP. Maximum 10 Mo.", "unsupported": "Choisissez une image JPEG, PNG ou WebP.", "oversized": "La photo sélectionnée dépasse 10 Mo.",
+      "maximum": "La limite de cinq photos est atteinte.", "uploadError": "Impossible d'ajouter la photo.", "uploadSuccess": "Photo ajoutée.",
+      "primary": "Principale", "setPrimary": "Définir comme principale", "settingPrimary": "Mise à jour...", "primarySuccess": "Photo principale mise à jour.", "primaryError": "Impossible de changer la photo principale.",
+      "delete": "Supprimer la photo", "deleteTitle": "Supprimer cette photo ?", "deleteDescription": "Cette photo sera retirée de la fiche de l'animal.", "deleteConfirm": "Supprimer la photo", "deleting": "Suppression...",
+      "deleteSuccess": "Photo supprimée.", "deleteError": "Impossible de supprimer la photo.", "open": "Ouvrir la photo en grand", "close": "Fermer l'aperçu", "broken": "La photo n'est pas disponible"
+    },
+    "history": {
+      "title": "Historique de l'animal", "loading": "Chargement de l'historique...", "emptyTitle": "Aucun historique", "emptyDescription": "Les activités apparaîtront ici à mesure que des données sont ajoutées.",
+      "error": "Impossible de charger l'historique.", "weight": "{weight} kg", "health": "{type} : {title}"
+    },
+    "growth": {
+      "title": "Suivi de croissance", "description": "Suivez les mesures de poids réelles de cet animal.", "add": "Ajouter un poids", "latest": "Dernier poids", "previous": "Poids précédent", "difference": "Différence",
+      "latestDate": "Dernière mesure", "noValue": "—", "chartTitle": "Courbe de poids", "chartEmpty": "Ajoutez au moins deux poids pour afficher une courbe utile.",
+      "historyTitle": "Historique des poids", "loading": "Chargement des poids...", "emptyTitle": "Aucune mesure de poids", "emptyDescription": "Ajoutez la première mesure pour commencer le suivi.",
+      "error": "Impossible de charger les poids.", "weightKg": "Poids en kilogrammes", "recordedAt": "Date de mesure", "note": "Note facultative",
+      "notePlaceholder": "Par exemple, mesuré avant l'alimentation", "save": "Ajouter la mesure", "saving": "Ajout de la mesure...", "positive": "Le poids doit être supérieur à zéro.",
+      "futureDate": "La date ne peut pas être future.", "success": "Mesure de poids ajoutée.", "addError": "Impossible d'ajouter la mesure.", "duplicate": "Un poids existe déjà pour cette date.", "kilograms": "kg"
+    },
+    "health": {
+      "title": "Dossiers de santé", "description": "Conservez un historique factuel des vaccinations, maladies, traitements, contrôles et notes.", "current": "État de santé actuel", "add": "Ajouter un dossier",
+      "remindersTitle": "Rappels à venir", "noReminders": "Aucun rappel à venir.", "reminderOn": "Rappel le {date}", "historyTitle": "Historique médical", "all": "Tous",
+      "loading": "Chargement des dossiers de santé...", "emptyTitle": "Aucun dossier de santé", "emptyDescription": "Ajoutez le premier dossier factuel de cet animal.", "filterEmpty": "Aucun dossier ne correspond à ce filtre.",
+      "error": "Impossible de charger les dossiers de santé.", "recordType": "Type de dossier", "recordTitle": "Titre", "recordedAt": "Date", "descriptionLabel": "Description (facultative)",
+      "medicine": "Nom du médicament (facultatif)", "nextReminder": "Date du prochain rappel (facultative)", "titlePlaceholder": "Titre factuel court", "descriptionPlaceholder": "Consignez des observations sans poser de diagnostic",
+      "medicinePlaceholder": "Nom du médicament, si applicable", "save": "Ajouter le dossier", "saving": "Ajout du dossier...", "futureDate": "La date du dossier ne peut pas être future.",
+      "success": "Dossier de santé ajouté.", "addError": "Impossible d'ajouter le dossier.", "medicineLabel": "Médicament", "verification": "Vérification", "noDiagnosis": "Ce registre consigne des informations et ne fournit ni diagnostic médical ni conseil de traitement."
+    }
   },
   "footer": {
     "tagline": "Registre d'élevage et accès au marché pour les agriculteurs marocains.",

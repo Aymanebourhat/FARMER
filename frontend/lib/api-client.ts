@@ -6,6 +6,17 @@ import type {
   LoginPayload,
   RegisterPayload,
 } from "@/types/user";
+import type {
+  Animal,
+  AnimalCreateInput,
+  AnimalHistoryEvent,
+  AnimalPhoto,
+  AnimalUpdateInput,
+  HealthRecord,
+  HealthRecordCreateInput,
+  WeightRecord,
+  WeightRecordCreateInput,
+} from "@/types/animal";
 
 const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 
@@ -25,10 +36,15 @@ type RequestOptions = {
   token?: string | null;
 };
 
+export function resolveApiMediaUrl(fileUrl: string): string {
+  if (/^https?:\/\//i.test(fileUrl)) return fileUrl;
+  return `${API_BASE_URL}${fileUrl.startsWith("/") ? "" : "/"}${fileUrl}`;
+}
+
 async function request<T>(path: string, init: RequestInit = {}, options: RequestOptions = {}): Promise<T> {
   const headers = new Headers(init.headers);
 
-  if (!headers.has("Content-Type") && init.body) {
+  if (!headers.has("Content-Type") && init.body && !(init.body instanceof FormData)) {
     headers.set("Content-Type", "application/json");
   }
 
@@ -111,4 +127,35 @@ export const apiClient = {
       { token },
     );
   },
+
+  listAnimals: (token: string) => request<Animal[]>("/api/v1/animals", {}, { token }),
+  createAnimal: (token: string, payload: AnimalCreateInput) =>
+    request<Animal>("/api/v1/animals", { method: "POST", body: JSON.stringify(payload) }, { token }),
+  getAnimal: (token: string, animalId: string) =>
+    request<Animal>(`/api/v1/animals/${animalId}`, {}, { token }),
+  updateAnimal: (token: string, animalId: string, payload: AnimalUpdateInput) =>
+    request<Animal>(`/api/v1/animals/${animalId}`, { method: "PATCH", body: JSON.stringify(payload) }, { token }),
+  deleteAnimal: (token: string, animalId: string) =>
+    request<void>(`/api/v1/animals/${animalId}`, { method: "DELETE" }, { token }),
+  getAnimalHistory: (token: string, animalId: string) =>
+    request<AnimalHistoryEvent[]>(`/api/v1/animals/${animalId}/history`, {}, { token }),
+  listAnimalPhotos: (token: string, animalId: string) =>
+    request<AnimalPhoto[]>(`/api/v1/animals/${animalId}/photos`, {}, { token }),
+  uploadAnimalPhoto(token: string, animalId: string, file: File) {
+    const body = new FormData();
+    body.append("file", file);
+    return request<AnimalPhoto>(`/api/v1/animals/${animalId}/photos`, { method: "POST", body }, { token });
+  },
+  deleteAnimalPhoto: (token: string, animalId: string, photoId: string) =>
+    request<void>(`/api/v1/animals/${animalId}/photos/${photoId}`, { method: "DELETE" }, { token }),
+  setPrimaryAnimalPhoto: (token: string, animalId: string, photoId: string) =>
+    request<AnimalPhoto>(`/api/v1/animals/${animalId}/photos/${photoId}/primary`, { method: "PATCH" }, { token }),
+  listWeights: (token: string, animalId: string) =>
+    request<WeightRecord[]>(`/api/v1/animals/${animalId}/weights`, {}, { token }),
+  createWeight: (token: string, animalId: string, payload: WeightRecordCreateInput) =>
+    request<WeightRecord>(`/api/v1/animals/${animalId}/weights`, { method: "POST", body: JSON.stringify(payload) }, { token }),
+  listHealthRecords: (token: string, animalId: string) =>
+    request<HealthRecord[]>(`/api/v1/animals/${animalId}/health-records`, {}, { token }),
+  createHealthRecord: (token: string, animalId: string, payload: HealthRecordCreateInput) =>
+    request<HealthRecord>(`/api/v1/animals/${animalId}/health-records`, { method: "POST", body: JSON.stringify(payload) }, { token }),
 };

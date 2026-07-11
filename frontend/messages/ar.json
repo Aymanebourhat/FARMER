@@ -23,6 +23,7 @@
   "header": {
     "features": "الخدمات",
     "dashboard": "لوحة التحكم",
+    "animals": "الحيوانات",
     "profile": "الملف",
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
@@ -30,6 +31,7 @@
     "arabic": "العربية",
     "darija": "الدارجة المغربية",
     "french": "Français",
+    "english": "English",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة"
   },
@@ -147,6 +149,82 @@
     "informationCardText": "نسبة الإكمال تأتي من الخادم ولا يتم حسابها أو تزويرها في الواجهة.",
     "edit": "تعديل معلومات الضيعة",
     "lastUpdated": "آخر تحديث"
+  },
+  "animals": {
+    "title": "سجل الماشية",
+    "description": "سجّل حيوانات ضيعتك وحافظ على معلوماتها محدثة.",
+    "addAnimal": "إضافة حيوان",
+    "loadingList": "جارٍ تحميل الحيوانات...",
+    "emptyTitle": "لا توجد حيوانات مسجلة",
+    "emptyDescription": "أضف أول حيوان لبدء تتبع هويته ونموه وصوره وصحته.",
+    "failedLoad": "تعذر تحميل سجل الماشية.",
+    "forbiddenTitle": "يلزم حساب فلاح",
+    "forbiddenDescription": "يمكن لحسابات الفلاحين فقط الوصول إلى سجل الماشية وإدارته.",
+    "missingTitle": "الحيوان غير موجود",
+    "missingDescription": "هذا الحيوان غير موجود أو غير متاح لهذا الحساب.",
+    "viewAnimal": "عرض الحيوان",
+    "imageAlt": "صورة {animal}",
+    "noPhoto": "لا توجد صورة",
+    "ageExact": "وُلد في {date}",
+    "ageEstimated": "العمر حوالي {months} شهراً",
+    "tabs": { "label": "أقسام الحيوان", "overview": "نظرة عامة", "growth": "النمو", "health": "الصحة" },
+    "values": {
+      "sheep": "غنم", "cow": "بقر", "goat": "ماعز", "camel": "جمل", "other": "آخر",
+      "male": "ذكر", "female": "أنثى", "unknown": "غير معروف",
+      "healthy": "سليم", "sick": "مريض", "recovering": "يتعافى",
+      "owned": "مملوك", "listed": "معروض", "reserved": "محجوز", "sold": "مباع", "dead": "نافق",
+      "not_ready": "غير جاهز", "ready": "جاهز",
+      "self_reported": "معلومات صرّح بها الفلاح", "admin_reviewed": "راجعتها الإدارة", "vet_verified": "تحقق منها بيطري",
+      "farmer_reported": "معلومات صرّح بها الفلاح",
+      "vaccine": "تلقيح", "illness": "مرض", "treatment": "علاج", "checkup": "فحص", "note": "ملاحظة عامة",
+      "animal_created": "تم تسجيل الحيوان", "weight_recorded": "تم تسجيل الوزن", "health_recorded": "تمت إضافة سجل صحي", "photo_uploaded": "تم رفع صورة"
+    },
+    "form": {
+      "createTitle": "إضافة حيوان", "editTitle": "تعديل الحيوان", "subtitle": "أدخل المعلومات الحقيقية للحيوان. يتم التحقق من الحقول المطلوبة قبل الحفظ.",
+      "species": "النوع", "breed": "السلالة", "sex": "الجنس", "ageMethod": "كيف تعرف عمر الحيوان؟", "exactDate": "تاريخ ولادة دقيق", "estimatedAge": "عمر تقديري",
+      "birthDate": "تاريخ الولادة", "ageMonths": "العمر التقديري بالأشهر", "color": "اللون", "healthStatus": "الحالة الصحية", "saleReadiness": "الجاهزية للبيع", "notes": "ملاحظات التعريف",
+      "create": "إنشاء الحيوان", "creating": "جارٍ الإنشاء...", "save": "حفظ التعديلات", "saving": "جارٍ الحفظ...", "cancel": "إلغاء",
+      "positive": "أدخل عدداً صحيحاً أكبر من صفر.", "futureDate": "لا يمكن أن يكون التاريخ في المستقبل.", "chooseAge": "أدخل معلومة العمر التي اخترتها.",
+      "createSuccess": "تم إنشاء الحيوان بنجاح.", "updateSuccess": "تم تحديث الحيوان.", "generalError": "تعذر حفظ الحيوان.",
+      "breedPlaceholder": "مثلاً: الصردي", "colorPlaceholder": "مثلاً: أبيض بعلامة سوداء", "notesPlaceholder": "علامات ظاهرة أو تفاصيل تعريف خاصة"
+    },
+    "detail": {
+      "back": "العودة إلى الحيوانات", "edit": "تعديل", "archive": "أرشفة الحيوان", "identity": "الهوية والحالة", "species": "النوع", "breed": "السلالة", "sex": "الجنس",
+      "birthDate": "تاريخ الولادة", "estimatedAge": "العمر التقديري", "months": "{count} شهراً", "color": "اللون", "healthStatus": "الحالة الصحية", "ownershipStatus": "حالة الملكية",
+      "saleReadiness": "الجاهزية للبيع", "verification": "التحقق", "notes": "ملاحظات التعريف", "created": "تاريخ التسجيل", "updated": "آخر تحديث", "notProvided": "غير متوفر",
+      "archiveTitle": "أرشفة هذا الحيوان؟", "archiveDescription": "ستتم أرشفة {animal} وإزالته من السجل النشط، ولن تبقى صفحته متاحة.",
+      "archiveConfirm": "أرشفة الحيوان", "archiving": "جارٍ الأرشفة...", "archiveSuccess": "تمت أرشفة الحيوان.", "archiveError": "تعذرت أرشفة الحيوان."
+    },
+    "photos": {
+      "title": "صور الحيوان", "count": "{count} من 5 صور", "loading": "جارٍ تحميل الصور...", "emptyTitle": "لا توجد صور", "emptyDescription": "أضف صورة واضحة بصيغة JPEG أو PNG أو WebP.",
+      "select": "اختيار صورة", "replace": "اختيار صورة أخرى", "preview": "معاينة الصورة المختارة", "upload": "رفع الصورة", "uploading": "جارٍ رفع الصورة وتحسينها...",
+      "supported": "JPEG أو PNG أو WebP، بحد أقصى 10 ميغابايت.", "unsupported": "اختر صورة بصيغة JPEG أو PNG أو WebP.", "oversized": "الصورة المختارة أكبر من 10 ميغابايت.",
+      "maximum": "تم بلوغ الحد الأقصى وهو خمس صور.", "uploadError": "تعذر رفع الصورة.", "uploadSuccess": "تم رفع الصورة.",
+      "primary": "رئيسية", "setPrimary": "تعيين كرئيسية", "settingPrimary": "جارٍ التحديث...", "primarySuccess": "تم تحديث الصورة الرئيسية.", "primaryError": "تعذر تحديث الصورة الرئيسية.",
+      "delete": "حذف الصورة", "deleteTitle": "حذف هذه الصورة؟", "deleteDescription": "ستُحذف هذه الصورة من سجل الحيوان.", "deleteConfirm": "حذف الصورة", "deleting": "جارٍ الحذف...",
+      "deleteSuccess": "تم حذف الصورة.", "deleteError": "تعذر حذف الصورة.", "open": "فتح الصورة بالحجم الكامل", "close": "إغلاق معاينة الصورة", "broken": "صورة الحيوان غير متاحة"
+    },
+    "history": {
+      "title": "سجل نشاط الحيوان", "loading": "جارٍ تحميل السجل...", "emptyTitle": "لا يوجد سجل بعد", "emptyDescription": "ستظهر أنشطة السجل هنا عند إضافة البيانات.",
+      "error": "تعذر تحميل سجل الحيوان.", "weight": "{weight} كغ", "health": "{type}: {title}"
+    },
+    "growth": {
+      "title": "تتبع النمو", "description": "تتبع قياسات الوزن الحقيقية لهذا الحيوان.", "add": "إضافة وزن", "latest": "آخر وزن", "previous": "الوزن السابق", "difference": "الفرق",
+      "latestDate": "تاريخ آخر قياس", "noValue": "—", "chartTitle": "منحنى الوزن", "chartEmpty": "أضف قياسين للوزن على الأقل لعرض منحنى مفيد.",
+      "historyTitle": "سجل الأوزان", "loading": "جارٍ تحميل الأوزان...", "emptyTitle": "لا توجد قياسات وزن", "emptyDescription": "أضف أول قياس لبدء تتبع النمو.",
+      "error": "تعذر تحميل الأوزان.", "weightKg": "الوزن بالكيلوغرام", "recordedAt": "تاريخ القياس", "note": "ملاحظة اختيارية",
+      "notePlaceholder": "مثلاً: تم القياس قبل التغذية", "save": "إضافة القياس", "saving": "جارٍ إضافة القياس...", "positive": "يجب أن يكون الوزن أكبر من صفر.",
+      "futureDate": "لا يمكن أن يكون التاريخ في المستقبل.", "success": "تمت إضافة قياس الوزن.", "addError": "تعذرت إضافة القياس.", "duplicate": "يوجد وزن مسجل في هذا التاريخ.", "kilograms": "كغ"
+    },
+    "health": {
+      "title": "السجلات الصحية", "description": "احتفظ بسجل واقعي للتلقيحات والأمراض والعلاجات والفحوصات والملاحظات.", "current": "الحالة الصحية الحالية", "add": "إضافة سجل صحي",
+      "remindersTitle": "التذكيرات القادمة", "noReminders": "لا توجد تذكيرات قادمة.", "reminderOn": "تذكير في {date}", "historyTitle": "السجل الطبي", "all": "الكل",
+      "loading": "جارٍ تحميل السجلات الصحية...", "emptyTitle": "لا توجد سجلات صحية", "emptyDescription": "أضف أول سجل صحي واقعي لهذا الحيوان.", "filterEmpty": "لا توجد سجلات تطابق هذا المرشح.",
+      "error": "تعذر تحميل السجلات الصحية.", "recordType": "نوع السجل", "recordTitle": "العنوان", "recordedAt": "التاريخ", "descriptionLabel": "الوصف (اختياري)",
+      "medicine": "اسم الدواء (اختياري)", "nextReminder": "تاريخ التذكير القادم (اختياري)", "titlePlaceholder": "عنوان واقعي مختصر", "descriptionPlaceholder": "سجّل الملاحظات دون تقديم تشخيص",
+      "medicinePlaceholder": "اسم الدواء عند الحاجة", "save": "إضافة السجل", "saving": "جارٍ إضافة السجل...", "futureDate": "لا يمكن أن يكون تاريخ السجل في المستقبل.",
+      "success": "تمت إضافة السجل الصحي.", "addError": "تعذرت إضافة السجل.", "medicineLabel": "الدواء", "verification": "التحقق", "noDiagnosis": "هذا السجل يوثق المعلومات فقط ولا يقدم تشخيصاً طبياً أو نصائح علاجية."
+    }
   },
   "footer": {
     "tagline": "منصة سجل الماشية والوصول إلى السوق للفلاح المغربي.",

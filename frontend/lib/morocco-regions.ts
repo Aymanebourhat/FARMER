@@ -1,4 +1,4 @@
-import type { Locale } from "@/lib/i18n";
+import { isRtlLocale, type Locale } from "@/lib/i18n";
 
 export const MOROCCO_REGIONS = {
   "Tanger-Tetouan-Al Hoceima": [
@@ -111,7 +111,7 @@ export function getProvinceOptions(region: string | null | undefined): readonly 
 }
 
 export function getRegionLabel(region: string, locale: Locale): string {
-  if (locale !== "fr" && region in regionLabelsAr) {
+  if (isRtlLocale(locale) && region in regionLabelsAr) {
     return regionLabelsAr[region as MoroccoRegion] ?? region;
   }
 

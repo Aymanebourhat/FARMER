@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { BrandMark } from "@/components/ui/brand-mark";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 
 type SiteHeaderProps = {
   locale: Locale;
@@ -17,7 +17,7 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const pathname = usePathname();
   const homeHref = `/${locale}`;
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
 
   const languageHref = (nextLocale: Locale) => {
     const segments = pathname.split("/").filter(Boolean);
@@ -29,11 +29,12 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
   };
 
   const currentLanguageLabel =
-    locale === "ar" ? content.arabic : locale === "ary" ? content.darija : content.french;
+    locale === "ar" ? content.arabic : locale === "ary" ? content.darija : locale === "fr" ? content.french : content.english;
 
   const navItems = [
     { href: `${homeHref}#features`, label: content.features },
     { href: `/${locale}/dashboard`, label: content.dashboard },
+    { href: `/${locale}/animals`, label: content.animals },
     { href: `/${locale}/profile`, label: content.profile },
   ];
 
@@ -102,6 +103,13 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
                     onClick={() => setLangMenuOpen(false)}
                   />
                   <LanguageLink
+                    href={languageHref("en")}
+                    label={content.english}
+                    active={locale === "en"}
+                    alignRight={isRtl}
+                    onClick={() => setLangMenuOpen(false)}
+                  />
+                  <LanguageLink
                     href={languageHref("ary")}
                     label={content.darija}
                     active={locale === "ary"}
@@ -163,11 +171,17 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
               </Link>
             ))}
             <hr className="border-secondary-container/60" />
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <MobileLanguageLink
                 href={languageHref("ar")}
                 label={content.arabic}
                 active={locale === "ar"}
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <MobileLanguageLink
+                href={languageHref("en")}
+                label={content.english}
+                active={locale === "en"}
                 onClick={() => setMobileMenuOpen(false)}
               />
               <MobileLanguageLink

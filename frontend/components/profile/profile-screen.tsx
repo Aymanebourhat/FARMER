@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ApiError, apiClient } from "@/lib/api-client";
 import { clearAuthSession, getAccessToken, restoreSession } from "@/lib/auth";
 import { getProvinceOptions, getRegionLabel, isKnownRegion, regionOptions } from "@/lib/morocco-regions";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { dateLocale, isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 import type { AuthUser, FarmerProfile, FarmerProfilePayload, FarmSizeLabel, LivestockType } from "@/types/user";
 
 type ProfileScreenProps = {
@@ -183,7 +183,7 @@ export function ProfileScreen({ locale, dictionary }: ProfileScreenProps) {
 }
 
 function ProfileForm({ locale, dictionary, profile, onCancel, onSaved }: { locale: Locale; dictionary: Dictionary; profile: FarmerProfile | null; onCancel?: () => void; onSaved: (profile: FarmerProfile) => void }) {
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
   const text = dictionary.profile;
   const common = dictionary.common;
   const reducedMotion = useReducedMotion();
@@ -414,7 +414,7 @@ function ProfileForm({ locale, dictionary, profile, onCancel, onSaved }: { local
 }
 
 function ProfileDetails({ locale, dictionary, user, profile, onEdit, onSignOut }: { locale: Locale; dictionary: Dictionary; user: AuthUser; profile: FarmerProfile; onEdit: () => void; onSignOut: () => void }) {
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
   const text = dictionary.profile;
   const common = dictionary.common;
   const livestockLabel = profile.main_livestock_type && profile.main_livestock_type in text ? text[profile.main_livestock_type as LivestockType] : dictionary.common.empty;
@@ -472,7 +472,7 @@ function ProfileDetails({ locale, dictionary, user, profile, onEdit, onSignOut }
               <Detail label={`${text.region} & ${text.province}`} value={`${profile.province} (${profile.region})`} isRtl={isRtl} />
               <Detail label={text.commune} value={profile.commune ?? common.empty} isRtl={isRtl} />
               <Detail label={text.farmSizeLabel} value={farmSizeLabel} isRtl={isRtl} />
-              <Detail label={text.lastUpdated} value={new Date(profile.updated_at).toLocaleDateString(locale !== "fr" ? "ar-MA" : "fr-FR")} isRtl={isRtl} />
+              <Detail label={text.lastUpdated} value={new Date(profile.updated_at).toLocaleDateString(dateLocale(locale))} isRtl={isRtl} />
             </div>
           </div>
 
@@ -581,9 +581,11 @@ function Detail({ label, value, isRtl }: { label: string; value: string; isRtl: 
 function useTypingPlaceholder(locale: Locale, reducedMotion: boolean) {
   const phrases = useMemo(
     () =>
-      locale !== "fr"
+      isRtlLocale(locale)
         ? ["مثلا: ضيعة البركة", "أدخل اسم ضيعتك هنا"]
-        : ["ex: Domaine Al Baraka", "Saisissez le nom de votre domaine"],
+        : locale === "fr"
+          ? ["ex: Domaine Al Baraka", "Saisissez le nom de votre domaine"]
+          : ["e.g. Al Baraka Farm", "Enter your farm name"],
     [locale],
   );
   const [phraseIndex, setPhraseIndex] = useState(0);

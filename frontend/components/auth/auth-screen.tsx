@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import { ApiError, apiClient } from "@/lib/api-client";
 import { setAuthSession } from "@/lib/auth";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 import type { BackendLanguage, RegisterPayload } from "@/types/user";
 
 type AuthScreenProps = {
@@ -25,7 +25,7 @@ type PhraseSet = {
 
 export function AuthScreen({ locale, dictionary, mode }: AuthScreenProps) {
   const router = useRouter();
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
   const auth = dictionary.auth;
   const common = dictionary.common;
   const reducedMotion = useReducedMotion();

@@ -23,6 +23,7 @@
   "header": {
     "features": "الخدمات",
     "dashboard": "الطابلو",
+    "animals": "الحيوانات",
     "profile": "البروفيل",
     "login": "دخل",
     "register": "حل حساب",
@@ -30,6 +31,7 @@
     "arabic": "العربية",
     "darija": "الدارجة المغربية",
     "french": "Français",
+    "english": "English",
     "openMenu": "حل المينيو",
     "closeMenu": "سد المينيو"
   },
@@ -147,6 +149,82 @@
     "informationCardText": "نسبة التكمال جاية من السيرفر وماشي محسوبة ولا مزورة فالواجهة.",
     "edit": "بدل معلومات الضيعة",
     "lastUpdated": "آخر تحديث"
+  },
+  "animals": {
+    "title": "ريجيستر الكسيبة",
+    "description": "سجّل الحيوانات ديال الضيعة وخلي المعلومات ديالهم ديما مجددين.",
+    "addAnimal": "زيد حيوان",
+    "loadingList": "كنحمّلو الحيوانات ديالك...",
+    "emptyTitle": "ما مسجل حتى حيوان",
+    "emptyDescription": "زيد أول حيوان باش تبدا تتبع التعريف ديالو والنمو والصور والصحة.",
+    "failedLoad": "ما قدرناش نحملو ريجيستر الكسيبة.",
+    "forbiddenTitle": "خاص حساب ديال فلاح",
+    "forbiddenDescription": "غير حسابات الفلاحة يقدرو يدخلو ويسيرو ريجيستر الكسيبة.",
+    "missingTitle": "الحيوان ما لقيناهش",
+    "missingDescription": "هاد الحيوان ما كاينش ولا ما متاحش لهاد الحساب.",
+    "viewAnimal": "شوف الحيوان",
+    "imageAlt": "تصويرة ديال {animal}",
+    "noPhoto": "ما كايناش تصويرة",
+    "ageExact": "تزاد نهار {date}",
+    "ageEstimated": "العمر تقريباً {months} شهر",
+    "tabs": { "label": "أقسام الحيوان", "overview": "نظرة عامة", "growth": "النمو", "health": "الصحة" },
+    "values": {
+      "sheep": "غنم", "cow": "بقر", "goat": "معز", "camel": "جمل", "other": "آخر",
+      "male": "ذكر", "female": "نتاية", "unknown": "ما معروفش",
+      "healthy": "بصحة مزيانة", "sick": "مريض", "recovering": "كيتعافى",
+      "owned": "ديال الضيعة", "listed": "معروض", "reserved": "محجوز", "sold": "تباع", "dead": "مات",
+      "not_ready": "ما واجدش", "ready": "واجد",
+      "self_reported": "مصرّح بيها الفلاح", "admin_reviewed": "راجعها الأدمن", "vet_verified": "أكدها البيطري",
+      "farmer_reported": "مصرّح بيها الفلاح",
+      "vaccine": "تلقيح", "illness": "مرض", "treatment": "علاج", "checkup": "فحص", "note": "ملاحظة عامة",
+      "animal_created": "تسجل الحيوان", "weight_recorded": "تسجل الوزن", "health_recorded": "تزاد سجل صحي", "photo_uploaded": "تزادت تصويرة"
+    },
+    "form": {
+      "createTitle": "زيد حيوان", "editTitle": "بدل معلومات الحيوان", "subtitle": "دخل المعلومات الصحيحة ديال الحيوان. الخانات الضرورية كيتأكدو قبل الحفظ.",
+      "species": "النوع", "breed": "السلالة", "sex": "الجنس", "ageMethod": "كيفاش عارف العمر؟", "exactDate": "تاريخ الازدياد مضبوط", "estimatedAge": "عمر تقريبي",
+      "birthDate": "تاريخ الازدياد", "ageMonths": "العمر التقريبي بالشهور", "color": "اللون", "healthStatus": "الحالة الصحية", "saleReadiness": "واش واجد للبيع", "notes": "ملاحظات التعريف",
+      "create": "خلق الحيوان", "creating": "كنسجلو الحيوان...", "save": "حفظ التغييرات", "saving": "كيتحفظو التغييرات...", "cancel": "إلغاء",
+      "positive": "دخل عدد صحيح كبر من زيرو.", "futureDate": "التاريخ ما يقدرش يكون فالمستقبل.", "chooseAge": "دخل معلومة العمر اللي ختاريتي.",
+      "createSuccess": "تزاد الحيوان بنجاح.", "updateSuccess": "تبدلات معلومات الحيوان.", "generalError": "ما قدرناش نحفظو الحيوان.",
+      "breedPlaceholder": "مثلاً: الصردي", "colorPlaceholder": "مثلاً: بيض بعلامة كحلة", "notesPlaceholder": "علامات باينين ولا تفاصيل خاصة بالتعريف"
+    },
+    "detail": {
+      "back": "رجع للحيوانات", "edit": "بدل", "archive": "أرشف الحيوان", "identity": "التعريف والحالة", "species": "النوع", "breed": "السلالة", "sex": "الجنس",
+      "birthDate": "تاريخ الازدياد", "estimatedAge": "العمر التقريبي", "months": "{count} شهر", "color": "اللون", "healthStatus": "الحالة الصحية", "ownershipStatus": "حالة الملكية",
+      "saleReadiness": "واش واجد للبيع", "verification": "التأكيد", "notes": "ملاحظات التعريف", "created": "تاريخ التسجيل", "updated": "آخر تحديث", "notProvided": "ما متوفرش",
+      "archiveTitle": "نأرشفو هاد الحيوان؟", "archiveDescription": "غادي يتأرشف {animal} ويتحيد من الريجيستر النشيط، والصفحة ديالو ما تبقاش متاحة.",
+      "archiveConfirm": "أرشف الحيوان", "archiving": "كنأرشفو...", "archiveSuccess": "تأرشف الحيوان.", "archiveError": "ما قدرناش نأرشفو الحيوان."
+    },
+    "photos": {
+      "title": "تصاور الحيوان", "count": "{count} من 5 تصاور", "loading": "كنحمّلو التصاور...", "emptyTitle": "ما كايناش تصاور", "emptyDescription": "زيد تصويرة واضحة JPEG ولا PNG ولا WebP.",
+      "select": "ختار تصويرة", "replace": "ختار وحدة أخرى", "preview": "معاينة التصويرة المختارة", "upload": "طلع التصويرة", "uploading": "كنطلعو ونحسنو التصويرة...",
+      "supported": "JPEG ولا PNG ولا WebP، 10 ميغابايت كأقصى حد.", "unsupported": "ختار تصويرة JPEG ولا PNG ولا WebP.", "oversized": "التصويرة المختارة كبر من 10 ميغابايت.",
+      "maximum": "وصلتي للحد ديال خمسة تصاور.", "uploadError": "ما قدرناش نطلعو التصويرة.", "uploadSuccess": "طلعات التصويرة.",
+      "primary": "الرئيسية", "setPrimary": "خليها الرئيسية", "settingPrimary": "كنبدلو...", "primarySuccess": "تبدلات التصويرة الرئيسية.", "primaryError": "ما قدرناش نبدلو التصويرة الرئيسية.",
+      "delete": "مسح التصويرة", "deleteTitle": "نمسحو هاد التصويرة؟", "deleteDescription": "غادي تتحيد هاد التصويرة من سجل الحيوان.", "deleteConfirm": "مسح التصويرة", "deleting": "كنمسحو...",
+      "deleteSuccess": "تمسحات التصويرة.", "deleteError": "ما قدرناش نمسحو التصويرة.", "open": "حل التصويرة كبيرة", "close": "سد معاينة التصويرة", "broken": "تصويرة الحيوان ما متوفراش"
+    },
+    "history": {
+      "title": "تاريخ الحيوان", "loading": "كنحمّلو التاريخ...", "emptyTitle": "ما كاين حتى تاريخ دابا", "emptyDescription": "الأنشطة غادي يبانوا هنا ملي تزيد الداتا.",
+      "error": "ما قدرناش نحملو تاريخ الحيوان.", "weight": "{weight} كيلو", "health": "{type}: {title}"
+    },
+    "growth": {
+      "title": "تتبع النمو", "description": "تبع القياسات الحقيقية ديال الوزن.", "add": "زيد الوزن", "latest": "آخر وزن", "previous": "الوزن اللي قبل", "difference": "الفرق",
+      "latestDate": "تاريخ آخر قياس", "noValue": "—", "chartTitle": "منحنى الوزن", "chartEmpty": "زيد جوج قياسات على الأقل باش يبان منحنى مفيد.",
+      "historyTitle": "تاريخ الأوزان", "loading": "كنحمّلو الأوزان...", "emptyTitle": "ما كاين حتى وزن", "emptyDescription": "زيد أول قياس باش تبدا تتبع النمو.",
+      "error": "ما قدرناش نحملو الأوزان.", "weightKg": "الوزن بالكيلو", "recordedAt": "تاريخ القياس", "note": "ملاحظة اختيارية",
+      "notePlaceholder": "مثلاً: تقاس قبل الماكلة", "save": "زيد القياس", "saving": "كنزيدو القياس...", "positive": "الوزن خاصو يكون كبر من زيرو.",
+      "futureDate": "التاريخ ما يقدرش يكون فالمستقبل.", "success": "تزاد قياس الوزن.", "addError": "ما قدرناش نزيدو القياس.", "duplicate": "كاين وزن مسجل فهاد التاريخ.", "kilograms": "كيلو"
+    },
+    "health": {
+      "title": "السجلات الصحية", "description": "خلي تاريخ واقعي ديال التلقيحات والأمراض والعلاجات والفحوصات والملاحظات.", "current": "الحالة الصحية دابا", "add": "زيد سجل صحي",
+      "remindersTitle": "التذكيرات الجايين", "noReminders": "ما كاين حتى تذكير جاي.", "reminderOn": "تذكير نهار {date}", "historyTitle": "التاريخ الطبي", "all": "كاملين",
+      "loading": "كنحمّلو السجلات الصحية...", "emptyTitle": "ما كاين حتى سجل صحي", "emptyDescription": "زيد أول سجل صحي واقعي لهاد الحيوان.", "filterEmpty": "ما كاين حتى سجل بهاد الفيلتر.",
+      "error": "ما قدرناش نحملو السجلات الصحية.", "recordType": "نوع السجل", "recordTitle": "العنوان", "recordedAt": "التاريخ", "descriptionLabel": "الشرح (اختياري)",
+      "medicine": "سمية الدوا (اختياري)", "nextReminder": "تاريخ التذكير الجاي (اختياري)", "titlePlaceholder": "عنوان قصير وواقعي", "descriptionPlaceholder": "سجل الملاحظات بلا تشخيص",
+      "medicinePlaceholder": "سمية الدوا إلا كان", "save": "زيد السجل", "saving": "كنزيدو السجل...", "futureDate": "تاريخ السجل ما يقدرش يكون فالمستقبل.",
+      "success": "تزاد السجل الصحي.", "addError": "ما قدرناش نزيدو السجل.", "medicineLabel": "الدوا", "verification": "التأكيد", "noDiagnosis": "هاد الريجيستر غير كيسجل المعلومات وما كيعطي لا تشخيص طبي لا نصائح العلاج."
+    }
   },
   "footer": {
     "tagline": "سجل الماشية والوصول للسوق للفلاح المغربي.",

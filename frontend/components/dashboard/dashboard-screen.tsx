@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 import { ApiError, apiClient } from "@/lib/api-client";
 import { clearAuthSession, getAccessToken, restoreSession } from "@/lib/auth";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 import type { AuthUser, FarmerProfile } from "@/types/user";
 
 type DashboardScreenProps = {
@@ -18,7 +18,7 @@ type LoadState = "loading" | "ready" | "error";
 
 export function DashboardScreen({ locale, dictionary }: DashboardScreenProps) {
   const router = useRouter();
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
   const dashboard = dictionary.dashboard;
   const common = dictionary.common;
   const [state, setState] = useState<LoadState>("loading");

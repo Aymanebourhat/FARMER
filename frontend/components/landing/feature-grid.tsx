@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { FeatureIcon } from "@/components/ui/feature-icon";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 
 type FeatureGridProps = {
   locale: Locale;
@@ -10,7 +10,7 @@ type FeatureGridProps = {
 
 export function FeatureGrid({ locale, content }: FeatureGridProps) {
   const samplePoints = [content.sampleOne, content.sampleTwo, content.sampleThree];
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
 
   return (
     <section id="features" className="border-t border-secondary-container/30 py-12 md:py-16">

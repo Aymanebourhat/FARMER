@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 
 type HeroProps = {
   locale: Locale;
@@ -11,7 +11,7 @@ const heroImage =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuD7T7ZVX1JlopYVpf8dOx7L5EPWVpv5--r8VhFTBOsKlboPsWv-a7x9Cq4gLEcnQGYr5P1xNlwSuYiribqK-MuhxlrwCTN5di2g1b4p1cP7wrG9CsVTaQlOUCQxkac1QGmsuaYV9VZcpTsrF0encwcSBvBC_XEvBIg6cxyTztHp9t3vqVFXnDckZ_ZHBJNhPfrerL-tN4SVk0G-qP6ulWLUN1IHdcrNitABWLY4jeo5u0USiYBxArOQBYHaUiaTnu8LZM3m6u_qPrs";
 
 export function Hero({ locale, content }: HeroProps) {
-  const isRtl = locale !== "fr";
+  const isRtl = isRtlLocale(locale);
 
   return (
     <section className="py-12 md:py-16 lg:py-20">
