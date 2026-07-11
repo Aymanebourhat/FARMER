@@ -17,6 +17,7 @@ import type {
   WeightRecord,
   WeightRecordCreateInput,
 } from "@/types/animal";
+import type { FarmerDashboard } from "@/types/dashboard";
 
 const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 
@@ -127,6 +128,9 @@ export const apiClient = {
       { token },
     );
   },
+
+  getFarmerDashboard: (token: string) =>
+    request<FarmerDashboard>("/api/v1/farmers/me/dashboard", {}, { token }),
 
   listAnimals: (token: string) => request<Animal[]>("/api/v1/animals", {}, { token }),
   createAnimal: (token: string, payload: AnimalCreateInput) =>

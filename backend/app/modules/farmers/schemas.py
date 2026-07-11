@@ -1,7 +1,11 @@
-from datetime import datetime
+from datetime import date, datetime
+from decimal import Decimal
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+from app.modules.animals.models import Species
 
 
 class FarmerProfileRead(BaseModel):
@@ -42,3 +46,33 @@ class FarmerProfileUpsert(BaseModel):
             return None
         stripped = value.strip()
         return stripped or None
+
+
+class DashboardLatestWeight(BaseModel):
+    animal_id: UUID
+    animal_label: str
+    weight_kg: Decimal
+    recorded_at: date
+    note: str | None
+
+
+class DashboardActivityItem(BaseModel):
+    type: Literal[
+        "animal_created",
+        "weight_recorded",
+        "health_recorded",
+        "photo_uploaded",
+    ]
+    title: str
+    date: date | datetime
+    animal_id: UUID | None = None
+
+
+class FarmerDashboardRead(BaseModel):
+    total_animals: int
+    animals_by_species: dict[Species, int]
+    active_listings: int
+    ready_for_sale: int
+    health_alerts: int
+    latest_weight_updates: list[DashboardLatestWeight]
+    recent_activity: list[DashboardActivityItem]

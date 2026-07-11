@@ -81,6 +81,49 @@ Farmer profile `region` and `province` values must come from the static Morocco 
 
 Profile completion score is calculated by the backend using the formula in `docs/03-DATABASE-SCHEMA.md`.
 
+### Farmer dashboard response
+
+GET /api/v1/farmers/me/dashboard is farmer-only and returns metrics scoped to the
+authenticated farmer's non-deleted animals.
+
+    {
+      "total_animals": 3,
+      "animals_by_species": {
+        "sheep": 2,
+        "cow": 0,
+        "goat": 1,
+        "camel": 0,
+        "other": 0
+      },
+      "active_listings": 0,
+      "ready_for_sale": 2,
+      "health_alerts": 1,
+      "latest_weight_updates": [
+        {
+          "animal_id": "uuid",
+          "animal_label": "Sardi",
+          "weight_kg": "42.50",
+          "recorded_at": "2026-07-10",
+          "note": "Monthly check"
+        }
+      ],
+      "recent_activity": [
+        {
+          "type": "weight_recorded",
+          "title": "42.50 kg · Sardi",
+          "date": "2026-07-10",
+          "animal_id": "uuid"
+        }
+      ]
+    }
+
+Rules:
+
+- health_alerts counts reminders due on or before today.
+- latest_weight_updates is limited to 5.
+- recent_activity is limited to 10.
+- active_listings is 0 until the marketplace tables are implemented.
+
 ## Animals
 
 ```text

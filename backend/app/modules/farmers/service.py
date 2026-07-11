@@ -1,3 +1,4 @@
+from datetime import UTC, date, datetime, time
 from typing import Any
 
 from fastapi import HTTPException, status
@@ -7,7 +8,13 @@ from app.core.permissions import ensure_user_owns_profile, require_farmer
 from app.core.regions import is_valid_region, is_valid_region_province
 from app.modules.farmers import repository
 from app.modules.farmers.models import FarmerProfile
-from app.modules.farmers.schemas import FarmerProfileUpsert
+from app.modules.animals.models import Animal, Species
+from app.modules.farmers.schemas import (
+    DashboardActivityItem,
+    DashboardLatestWeight,
+    FarmerDashboardRead,
+    FarmerProfileUpsert,
+)
 from app.modules.users.models import User
 
 
@@ -100,3 +107,118 @@ async def upsert_my_profile(
     await session.commit()
     await session.refresh(profile)
     return profile
+
+
+def _animal_label(animal: Animal) -> str:
+    return animal.breed.strip() if animal.breed and animal.breed.strip() else animal.species.value
+
+
+def _activity_sort_value(value: date | datetime) -> datetime:
+    if isinstance(value, datetime):
+        return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
+    return datetime.combine(value, time.min, tzinfo=UTC)
+
+
+async def get_my_dashboard(
+    session: AsyncSession,
+    current_user: User,
+) -> FarmerDashboardRead:
+    require_farmer(current_user)
+
+    count_rows = await repository.get_dashboard_animal_counts(session, current_user.id)
+    animals_by_species = {species.value: 0 for species in Species}
+    total_animals = 0
+    ready_for_sale = 0
+    for species, count, ready_count in count_rows:
+        animals_by_species[species.value] = count
+        total_animals += count
+        ready_for_sale += ready_count
+
+    today = date.today()
+    health_alerts = await repository.count_due_health_alerts(
+        session,
+        user_id=current_user.id,
+        today=today,
+    )
+    latest_weight_rows = await repository.list_latest_weight_updates(
+        session,
+        user_id=current_user.id,
+        limit=5,
+    )
+    latest_weight_updates = [
+        DashboardLatestWeight(
+            animal_id=animal.id,
+            animal_label=_animal_label(animal),
+            weight_kg=record.weight_kg,
+            recorded_at=record.recorded_at,
+            note=record.note,
+        )
+        for record, animal in latest_weight_rows
+    ]
+
+    recent_animals = await repository.list_recent_animals(
+        session,
+        user_id=current_user.id,
+        limit=10,
+    )
+    recent_health = await repository.list_recent_health_records(
+        session,
+        user_id=current_user.id,
+        limit=10,
+    )
+    recent_photos = await repository.list_recent_photo_uploads(
+        session,
+        user_id=current_user.id,
+        limit=10,
+    )
+    activity: list[DashboardActivityItem] = [
+        DashboardActivityItem(
+            type="animal_created",
+            title=_animal_label(animal),
+            date=animal.created_at,
+            animal_id=animal.id,
+        )
+        for animal in recent_animals
+    ]
+    activity.extend(
+        DashboardActivityItem(
+            type="weight_recorded",
+            title=f"{record.weight_kg} kg · {_animal_label(animal)}",
+            date=record.recorded_at,
+            animal_id=animal.id,
+        )
+        for record, animal in latest_weight_rows
+    )
+    activity.extend(
+        DashboardActivityItem(
+            type="health_recorded",
+            title=record.title,
+            date=record.recorded_at,
+            animal_id=animal.id,
+        )
+        for record, animal in recent_health
+    )
+    activity.extend(
+        DashboardActivityItem(
+            type="photo_uploaded",
+            title=_animal_label(animal),
+            date=photo.uploaded_at,
+            animal_id=animal.id,
+        )
+        for photo, animal in recent_photos
+    )
+    recent_activity = sorted(
+        activity,
+        key=lambda item: _activity_sort_value(item.date),
+        reverse=True,
+    )[:10]
+
+    return FarmerDashboardRead(
+        total_animals=total_animals,
+        animals_by_species=animals_by_species,
+        active_listings=0,
+        ready_for_sale=ready_for_sale,
+        health_alerts=health_alerts,
+        latest_weight_updates=latest_weight_updates,
+        recent_activity=recent_activity,
+    )
