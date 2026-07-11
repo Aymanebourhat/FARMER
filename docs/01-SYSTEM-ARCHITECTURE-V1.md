@@ -1460,7 +1460,7 @@ Use:
 For animal photos:
 
 - allow only JPEG, PNG, WebP,
-- max file size, for example 5 MB,
+- max raw upload size: 10 MB,
 - compress images,
 - generate safe filenames,
 - never trust original filename,

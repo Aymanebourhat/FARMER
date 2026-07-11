@@ -120,7 +120,7 @@ Rules:
 
 - Farmer can only upload photos for own animals.
 - Accepted image types: JPEG, PNG, WebP.
-- Max size: 5 MB unless changed explicitly.
+- Max raw upload size: 10 MB.
 
 ## Weight records
 

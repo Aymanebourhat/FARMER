@@ -33,17 +33,17 @@ def calculate_profile_completion_score(values: dict[str, Any]) -> int:
 def _validate_location(region: str | None, province: str | None) -> None:
     if not region or not province:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="region and province are required",
         )
     if not is_valid_region(region):
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Unknown Morocco region",
         )
     if not is_valid_region_province(region, province):
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Province does not belong to selected region",
         )
 

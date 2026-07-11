@@ -15,6 +15,23 @@ class Settings(BaseSettings):
         validation_alias="JWT_ACCESS_TOKEN_EXPIRE_MINUTES",
     )
     cors_origins: list[str] = Field(default_factory=list, validation_alias="CORS_ORIGINS")
+    local_upload_dir: str = Field(default="uploads", validation_alias="LOCAL_UPLOAD_DIR")
+    max_animal_photo_upload_bytes: int = Field(
+        default=10_485_760,
+        gt=0,
+        validation_alias="MAX_ANIMAL_PHOTO_UPLOAD_BYTES",
+    )
+    animal_photo_max_dimension: int = Field(
+        default=2048,
+        gt=0,
+        validation_alias="ANIMAL_PHOTO_MAX_DIMENSION",
+    )
+    animal_photo_jpeg_quality: int = Field(
+        default=82,
+        ge=1,
+        le=95,
+        validation_alias="ANIMAL_PHOTO_JPEG_QUALITY",
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",

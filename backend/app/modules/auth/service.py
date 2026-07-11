@@ -21,7 +21,7 @@ def _auth_response_for_user(user: User) -> AuthResponse:
 async def register_user(session: AsyncSession, payload: RegisterRequest) -> AuthResponse:
     if payload.role not in PUBLIC_REGISTRATION_ROLES:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Public registration accepts only farmer or vet roles",
         )
 

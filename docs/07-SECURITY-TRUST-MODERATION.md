@@ -44,7 +44,7 @@ Trust levels:
 Animal photos:
 
 - JPEG, PNG, WebP only.
-- Max 5 MB.
+- Max raw upload size: 10 MB.
 - Max 5 photos per animal.
 - Generate safe server-side file names.
 - Do not trust original file names.
