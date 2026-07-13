@@ -9,6 +9,7 @@ from sqlalchemy.pool import StaticPool
 os.environ.setdefault("DATABASE_URL", "sqlite+aiosqlite:///:memory:")
 os.environ.setdefault("JWT_SECRET_KEY", "test-secret-key-for-phase-one-32-bytes-minimum")
 os.environ.setdefault("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "30")
+os.environ.setdefault("RATE_LIMIT_ENABLED", "false")
 
 from app import models  # noqa: E402,F401
 from app.core.database import Base, get_session  # noqa: E402
@@ -69,4 +70,3 @@ async def auth_headers(
         return {"Authorization": f"Bearer {token}"}
 
     return _register
-

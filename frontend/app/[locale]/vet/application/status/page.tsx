@@ -1,0 +1,1 @@
+import { VetStatusScreen } from "@/components/vets/vet-screens"; import { marketplacePageShell } from "@/components/marketplace/page-shell"; export default function Page({params}:{params:Promise<{locale:string}>}){return marketplacePageShell(params,(locale,dictionary)=><VetStatusScreen locale={locale} dictionary={dictionary}/>);}

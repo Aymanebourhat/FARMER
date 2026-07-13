@@ -1,0 +1,1 @@
+import { AdminAuditLogsScreen } from "@/components/admin/audit-logs"; import { marketplacePageShell } from "@/components/marketplace/page-shell"; export default function Page({params}:{params:Promise<{locale:string}>}){return marketplacePageShell(params,(locale,dictionary)=><AdminAuditLogsScreen locale={locale} dictionary={dictionary}/>);}

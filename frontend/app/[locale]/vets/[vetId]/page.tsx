@@ -1,0 +1,4 @@
+import { VetDetailScreen } from "@/components/vets/vet-screens";
+import { marketplacePageShell } from "@/components/marketplace/page-shell";
+export default function Page({params}:{params:Promise<{locale:string;vetId:string}>}){return marketplacePageShell(params,(locale,dictionary)=><Detail locale={locale} dictionary={dictionary} params={params}/>);}
+async function Detail({locale,dictionary,params}:{locale:Parameters<typeof VetDetailScreen>[0]["locale"];dictionary:Parameters<typeof VetDetailScreen>[0]["dictionary"];params:Promise<{locale:string;vetId:string}>}){const {vetId}=await params;return <VetDetailScreen locale={locale} dictionary={dictionary} vetId={vetId}/>;}

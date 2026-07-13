@@ -2,18 +2,67 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: farmer_app
-      POSTGRES_USER: farmer_app
-      POSTGRES_PASSWORD: farmer_app
+      POSTGRES_DB: ${POSTGRES_DB:-farmer_app}
+      POSTGRES_USER: ${POSTGRES_USER:-farmer_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-farmer_app}
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U farmer_app -d farmer_app"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-farmer_app} -d ${POSTGRES_DB:-farmer_app}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  backend:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: development
+      DEBUG: "false"
+      ENABLE_DOCS: "true"
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-farmer_app}:${POSTGRES_PASSWORD:-farmer_app}@db:5432/${POSTGRES_DB:-farmer_app}
+      SECRET_KEY: ${SECRET_KEY:-local-development-secret-change-before-production-0001}
+      ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      TRUSTED_HOSTS: localhost,127.0.0.1,backend
+      RATE_LIMIT_ENABLED: "true"
+      LOCAL_UPLOAD_DIR: /app/uploads
+      VET_DOCUMENT_UPLOAD_DIR: /app/private_uploads/vet-documents
+    ports:
+      - "8000:8000"
+    volumes:
+      - animal_uploads:/app/uploads
+      - vet_documents:/app/private_uploads/vet-documents
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://127.0.0.1:8000
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://127.0.0.1:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/en').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
 volumes:
   postgres_data:
+  animal_uploads:
+  vet_documents:

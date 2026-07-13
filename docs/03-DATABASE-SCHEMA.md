@@ -193,14 +193,18 @@ Indexes: status+created_at, region+province, price, expires_at.
 | province | varchar | Required; selected from static province list for the selected region |
 | phone | varchar | Required |
 | whatsapp | varchar nullable | Optional |
-| license_document_url | text | Required for approval |
+| license_document_key | varchar nullable | Private storage key; never public URL |
+| license_document_mime_type | varchar nullable | application/pdf, image/jpeg, image/png |
+| license_document_size_bytes | integer nullable | Raw validated upload size |
 | verification_status | enum | pending, approved, rejected |
 | rejection_reason | text nullable | Optional |
 | verified_at | timestamp nullable | Optional |
 | created_at | timestamp | Required |
 | updated_at | timestamp | Required |
 
-Indexes: region+province, verification_status.
+Indexes: user_id unique, verification_status, region+province, created_at.
+
+Phase 5A stores verification evidence under the private `VET_DOCUMENT_UPLOAD_DIR`; it is never mounted through public static media.
 
 ## `listing_reports`
 

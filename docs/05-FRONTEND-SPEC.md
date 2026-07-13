@@ -124,3 +124,9 @@ Darija should be helper/onboarding text, not a full formal locale in V1.
 - Avoid unnecessary client-side rendering.
 - Keep cards and forms usable on low-end mobile browsers.
 - Do not add heavy animation libraries in V1.
+
+## Phase 6 admin frontend
+
+Localized admin routes extend the existing application shell: `/[locale]/admin`, `/users`, `/users/[userId]`, `/listings`, `/listings/[listingId]`, `/reports`, `/reports/[reportId]`, `/audit-logs`, plus the existing `/vets` verification routes. Every route performs a direct admin-role check, supports loading/error/empty/success states, and uses the centralized authenticated API client.
+
+The shared admin navigation is responsive and contains Overview, Users, Marketplace listings, Listing reports, Vet verification, and Audit logs. List filters and pagination are URL synchronized. Critical changes use keyboard-accessible confirmation dialogs with required reasons or notes; audit logs remain read-only.

@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BrandMark } from "@/components/ui/brand-mark";
+import { restoreSession } from "@/lib/auth";
 import { isRtlLocale, type Dictionary, type Locale } from "@/lib/i18n";
 
 type SiteHeaderProps = {
@@ -16,7 +17,9 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const pathname = usePathname();
+  const [role, setRole] = useState<"farmer" | "vet" | "admin" | null>(null);
   const homeHref = `/${locale}`;
+  useEffect(() => { void restoreSession().then((user) => setRole(user?.role ?? null)); }, []);
   const isRtl = isRtlLocale(locale);
 
   const languageHref = (nextLocale: Locale) => {
@@ -33,9 +36,14 @@ export function SiteHeader({ locale, content }: SiteHeaderProps) {
 
   const navItems = [
     { href: `${homeHref}#features`, label: content.features },
+    { href: `/${locale}/marketplace`, label: content.marketplace },
     { href: `/${locale}/dashboard`, label: content.dashboard },
     { href: `/${locale}/animals`, label: content.animals },
     { href: `/${locale}/profile`, label: content.profile },
+    { href: `/${locale}/vets`, label: content.vets },
+    ...(role === "farmer" ? [{ href: `/${locale}/marketplace/sell`, label: content.sell }, { href: `/${locale}/marketplace/my-listings`, label: content.myListings }] : []),
+    ...(role === "vet" ? [{ href: `/${locale}/vet/application`, label: content.application }, { href: `/${locale}/vet/application/status`, label: content.application }] : []),
+    ...(role === "admin" ? [{ href: `/${locale}/admin`, label: content.admin }] : []),
   ];
 
   return (

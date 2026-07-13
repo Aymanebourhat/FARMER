@@ -140,6 +140,11 @@ async def get_my_dashboard(
         user_id=current_user.id,
         today=today,
     )
+    active_listings = await repository.count_active_marketplace_listings(
+        session,
+        user_id=current_user.id,
+        now=datetime.now(UTC),
+    )
     latest_weight_rows = await repository.list_latest_weight_updates(
         session,
         user_id=current_user.id,
@@ -216,7 +221,7 @@ async def get_my_dashboard(
     return FarmerDashboardRead(
         total_animals=total_animals,
         animals_by_species=animals_by_species,
-        active_listings=0,
+        active_listings=active_listings,
         ready_for_sale=ready_for_sale,
         health_alerts=health_alerts,
         latest_weight_updates=latest_weight_updates,

@@ -103,12 +103,12 @@ export function DashboardScreen({ locale, dictionary }: DashboardScreenProps) {
           icon={<HealthIcon />}
           alert={dashboardData.health_alerts > 0}
         />
-        <MetricCard
+        <Link href={`/${locale}/marketplace/my-listings`} className="block"><MetricCard
           title={text.activeListings}
           value={dashboardData.active_listings}
           description={text.marketplacePending}
           icon={<ListingIcon />}
-        />
+        /></Link>
       </section>
 
       <section className="grid items-start gap-6 lg:grid-cols-2">

@@ -44,3 +44,12 @@
 - Arabic/French routing works.
 - Mobile layout works.
 - No fake static dashboard data.
+
+## Phase 6 V1 acceptance checklist
+
+- Farmer: register/login, create profile, register animal, upload photo, add weight and health records, view dashboard, create/edit/sell listing.
+- Guest: browse/filter/view marketplace, contact seller, report listing, browse and view approved vets.
+- Vet: register, apply with private document, view pending/rejection, correct and resubmit, appear after approval, disappear after document replacement until reapproved.
+- Admin: view real statistics and private vet document, approve/reject vet, inspect users, suspend/reactivate farmer or vet, inspect/suspend/restore listing, dismiss/resolve report, view read-only audit logs.
+- Security: direct role guards, suspended-token rejection, public hiding, spoofed/oversized upload rejection, authenticated private document retrieval, invalid bearer rejection, rate-limit `429`, safe error bodies, restricted CORS/hosts.
+- Release: compile, full backend tests, migration upgrade/downgrade/upgrade when introduced, frontend lint/typecheck/tests/build, Compose config/build/health, and persistent-volume restart check.

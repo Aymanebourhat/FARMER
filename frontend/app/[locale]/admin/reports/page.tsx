@@ -1,0 +1,1 @@
+import { AdminReportsScreen } from "@/components/admin/listings-reports"; import { marketplacePageShell } from "@/components/marketplace/page-shell"; export default function Page({params}:{params:Promise<{locale:string}>}){return marketplacePageShell(params,(locale,dictionary)=><AdminReportsScreen locale={locale} dictionary={dictionary}/>);}

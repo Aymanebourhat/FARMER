@@ -244,15 +244,75 @@ page_size=20
 }
 ```
 
-## Vets
+### Phase 4A marketplace responses
+
+`GET /api/v1/marketplace/listings` is public and returns:
+
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "title": "Sardi sheep for sale",
+      "description": "Healthy animal",
+      "price_mad": "4500.00",
+      "region": "Marrakech-Safi",
+      "province": "Marrakech",
+      "contact_phone": "+212600000000",
+      "contact_whatsapp": "+212600000000",
+      "status": "active",
+      "trust_score": 30,
+      "expires_at": "2026-08-10T12:00:00Z",
+      "created_at": "2026-07-11T12:00:00Z",
+      "animal": {
+        "id": "uuid",
+        "species": "sheep",
+        "breed": "Sardi",
+        "sex": "male",
+        "birth_date": "2025-02-10",
+        "estimated_age_months": null,
+        "sale_readiness": "ready",
+        "latest_weight_kg": "42.50",
+        "primary_photo_url": "/uploads/animals/uuid/photo.jpg",
+        "photos": [{"id": "uuid", "file_url": "/uploads/animals/uuid/photo.jpg", "is_primary": true}],
+        "verification_label": "Farmer-reported data"
+      }
+    }
+  ],
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "pages": 1
+}
+```
+
+Public detail uses the same listing and animal fields. Owner mutation responses additionally include `farmer_id`, `animal_id`, and `updated_at`. Report creation returns `id`, `listing_id`, nullable `reporter_user_id`, `reason`, nullable `description`, `status`, and `created_at`. Money is serialized as a two-decimal JSON string.
+
+Phase 4A behavior:
+
+- Public reads always require `status=active`, `expires_at > now`, and a non-deleted animal. This query-time rule is the authoritative expiry check, so no scheduler is required.
+- During listing creation, a stale active row for the same animal is normalized to `expired` before duplicate validation; renewal updates the existing row.
+- Trust score is recalculated from current stored evidence whenever a marketplace response is built; creation and report actions persist the current score, while `highest_trust` ordering uses the same live evidence expression without making public reads write to the database.
+- An authenticated user repeating the same pending report reason and description for one listing receives `409`. Guest duplicate suppression is deferred because guests have no stable identity.
+- Phase 4A has no admin report-review/moderation endpoints and no background expiry worker; those remain Phase 6 work.
+
+## Vets (Phase 5A)
 
 ```text
 GET    /api/v1/vets
 GET    /api/v1/vets/{vet_id}
-POST   /api/v1/vets/apply
+POST   /api/v1/vets/apply                 multipart/form-data
 GET    /api/v1/vets/me
 PATCH  /api/v1/vets/me
+POST   /api/v1/vets/me/document           multipart/form-data
+GET    /api/v1/admin/vets/pending
+GET    /api/v1/admin/vets/{vet_id}
+GET    /api/v1/admin/vets/{vet_id}/document
+PATCH  /api/v1/admin/vets/{vet_id}/approve
+PATCH  /api/v1/admin/vets/{vet_id}/reject
 ```
+
+`POST /vets/apply` is vet-role only and requires `clinic_name`, `specialization`, `region`, `province`, `phone`, optional `whatsapp`, and a `document` PDF/JPEG/PNG up to 10 MB. Documents are private storage keys and are returned only as an authenticated admin download; no public schema includes document metadata or rejection reasons. Public reads include approved, active vet users only. Replacing a document resets a profile to `pending`, clears verification time and rejection reason. Contact/profile edits retain status. Rejected profiles can resubmit; pending and approved profiles receive `409`. Phase 5B frontend work remains deferred.
 
 ## Admin
 
@@ -280,3 +340,15 @@ GET   /api/v1/admin/stats
 - `422` for validation errors.
 - `422` for public registration attempts using `admin`, `buyer`, or any unsupported role.
 - Do not leak private farmer/admin data in public listing responses.
+
+## Phase 6 admin moderation API
+
+All routes require an active authenticated `admin` and use `/api/v1/admin`.
+
+- `GET /stats`
+- `GET /users`; `GET /users/{user_id}`; `PATCH /users/{user_id}/suspend`; `PATCH /users/{user_id}/activate`
+- `GET /listings`; `GET /listings/{listing_id}`; `PATCH /listings/{listing_id}/suspend`; `PATCH /listings/{listing_id}/restore`
+- `GET /reports`; `GET /reports/{report_id}`; `PATCH /reports/{report_id}/dismiss`; `PATCH /reports/{report_id}/resolve`
+- `GET /audit-logs` (read-only)
+
+List endpoints provide database filters and page sizes from 1–100. Report resolution actions are `no_action`, `suspend_listing`, and `suspend_farmer`. Lifecycle conflicts return `409`, validation returns `422`, and limited requests return `429` with `Retry-After`.

@@ -70,3 +70,18 @@ Public listing must not show:
 - internal admin flags,
 - private vet documents,
 - full farmer history.
+
+
+## Vet verification documents — Phase 5A
+
+Vet documents accept PDF, JPEG, and PNG only (maximum 10 MB). The API validates signatures/images, creates server-generated private keys, and stores files outside the public `/uploads` mount. Only authenticated admins can download a document through the protected admin-vet endpoint. Replacing evidence resets approval to pending. Public vet responses never contain storage keys, document metadata, or rejection reasons.
+
+## Phase 6 security and moderation controls
+
+Active-user status is checked on every authenticated request, so suspension blocks login and invalidates use of previously issued JWTs. Public marketplace queries join the listing owner and exclude non-active users; public vet queries likewise require an active approved vet. Optional authentication accepts an absent header but rejects invalid bearer tokens.
+
+Admin user, listing, report, and vet decisions write safe structured records to `admin_audit_logs`. Audit metadata never contains passwords, tokens, authorization headers, upload bytes, document keys, or health histories. Report reviewer, timestamp, and bounded admin note are stored separately.
+
+Sensitive auth, upload, listing/report creation, vet application, and admin mutation routes use a configurable in-process limiter and return `429` with `Retry-After`. It deliberately keys authenticated requests by verified JWT subject and otherwise uses the direct client IP; untrusted `X-Forwarded-For` is ignored. This limiter is single-instance only.
+
+API responses include `nosniff`, no-referrer, frame denial, and restrictive camera/microphone/geolocation headers. Production startup rejects placeholder or short JWT secrets, debug mode, and wildcard credentialed CORS. Trusted hosts and docs exposure are configurable.

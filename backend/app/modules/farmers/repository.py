@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.modules.animals.models import Animal, AnimalPhoto, SaleReadiness, Species
 from app.modules.farmers.models import FarmerProfile
 from app.modules.health.models import HealthRecord
+from app.modules.marketplace.models import ListingStatus, MarketplaceListing
 from app.modules.weights.models import WeightRecord
 
 
@@ -69,6 +70,24 @@ async def get_dashboard_animal_counts(
         (species, int(count), int(ready_count or 0))
         for species, count, ready_count in result.all()
     ]
+
+
+async def count_active_marketplace_listings(
+    session: AsyncSession,
+    *,
+    user_id: UUID,
+    now,
+) -> int:
+    result = await session.execute(
+        select(func.count(MarketplaceListing.id))
+        .join(FarmerProfile, MarketplaceListing.farmer_id == FarmerProfile.id)
+        .where(
+            FarmerProfile.user_id == user_id,
+            MarketplaceListing.status == ListingStatus.ACTIVE,
+            MarketplaceListing.expires_at > now,
+        )
+    )
+    return int(result.scalar_one())
 
 
 async def count_due_health_alerts(

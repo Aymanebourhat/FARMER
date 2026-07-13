@@ -10,6 +10,7 @@ from app.core.database import Base
 
 if TYPE_CHECKING:
     from app.modules.farmers.models import FarmerProfile
+    from app.modules.vets.models import VetProfile
 
 
 class UserRole(str, enum.Enum):
@@ -69,6 +70,8 @@ class User(Base):
         default=lambda: datetime.now(UTC),
         onupdate=lambda: datetime.now(UTC),
     )
+
+    vet_profile: Mapped["VetProfile | None"] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)
 
     farmer_profile: Mapped["FarmerProfile | None"] = relationship(
         back_populates="user",

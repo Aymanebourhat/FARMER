@@ -1,0 +1,13 @@
+export type VetVerificationStatus = "pending" | "approved" | "rejected";
+export type PublicVetSummary = { id: string; full_name: string; clinic_name: string | null; specialization: string | null; region: string; province: string; phone: string; whatsapp: string | null; verified_at: string; is_verified: true };
+export type PublicVetDetail = PublicVetSummary;
+export type PaginatedVetResponse<T = PublicVetSummary> = { items: T[]; page: number; page_size: number; total: number; pages: number };
+export type VetApplicationPayload = { clinic_name?: string | null; specialization?: string | null; region: string; province: string; phone: string; whatsapp?: string | null; document: File };
+export type VetSelfProfile = { id: string; clinic_name: string | null; specialization: string | null; region: string; province: string; phone: string; whatsapp: string | null; verification_status: VetVerificationStatus; rejection_reason: string | null; verified_at: string | null; has_document: boolean; document_mime_type: string | null; document_size_bytes: number | null; created_at: string; updated_at: string };
+export type VetProfileUpdatePayload = Partial<Pick<VetApplicationPayload, "clinic_name" | "specialization" | "region" | "province" | "phone" | "whatsapp">>;
+export type AdminVetSummary = { id: string; user_id: string; full_name: string; clinic_name: string | null; specialization: string | null; region: string; province: string; phone: string; whatsapp: string | null; has_document: boolean; document_mime_type: string | null; document_size_bytes: number | null; created_at: string; updated_at: string };
+export type AdminVetDetail = AdminVetSummary & { verification_status: VetVerificationStatus; rejection_reason: string | null; verified_at: string | null };
+export type VetRejectionPayload = { reason: string };
+export type VetDirectoryFilters = { region?: string; province?: string; specialization?: string; sort?: "recently_verified" | "name"; page?: number; page_size?: number };
+export type AdminVetFilters = Omit<VetDirectoryFilters, "specialization">;
+export type ApiDocument = { blob: Blob; contentType: string };

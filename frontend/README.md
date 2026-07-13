@@ -1,12 +1,20 @@
 # Frontend
 
-Target frontend stack:
+Next.js frontend extending the existing localized application shell for farmers, guests, vets, and admins.
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- React Hook Form
-- Zod
-- Recharts
+## Setup and validation
 
-Do not implement frontend code until Codex has read root `AGENTS.md`, `docs/04-API-SPEC.md`, and `docs/05-FRONTEND-SPEC.md`.
+Copy `.env.example` to an untracked environment file when needed, then:
+
+```powershell
+npm install
+npm run dev
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+The API origin is centralized through `NEXT_PUBLIC_API_BASE_URL`. Admin pages use the existing token/session handling and direct role guards. Supported locale routes remain Arabic, Moroccan Darija, French, and English; Arabic and Darija retain RTL layout.
+
+The production Docker image uses Next.js standalone output and contains no backend secrets or private uploads.

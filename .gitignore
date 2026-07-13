@@ -16,6 +16,7 @@ dist/
 
 # Uploads and local storage
 uploads/
+private_uploads/
 *.sqlite3
 *.db
 

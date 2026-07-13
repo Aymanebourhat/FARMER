@@ -63,7 +63,7 @@ describe("DashboardScreen", () => {
     expect(await screen.findByText("No species data yet")).toBeInTheDocument();
     expect(screen.getByText("No weight updates yet")).toBeInTheDocument();
     expect(screen.getByText("No recent activity")).toBeInTheDocument();
-    expect(screen.getByText(/Marketplace is not implemented yet/)).toBeInTheDocument();
+    expect(screen.getByText("My listings")).toBeInTheDocument();
   });
 
   it("renders real counts, species, weights, and recent activity", async () => {

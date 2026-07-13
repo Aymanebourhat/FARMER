@@ -114,3 +114,9 @@ Done means:
 - admin can moderate platform,
 - suspicious listings can be suspended,
 - admin actions are logged.
+
+### Phase 6 completion note
+
+The V1 slice now includes audited real statistics, user suspension/reactivation, listing suspension/restoration, report review actions, localized admin screens, active-owner public visibility enforcement, single-instance rate limiting, safe production configuration, and container persistence/health checks. Phase 1–5 architecture was extended in place.
+
+Deferred beyond V1: payments, logistics, buyer accounts, scheduling, messaging, AI features, government analytics, distributed limiting, and horizontal scaling.

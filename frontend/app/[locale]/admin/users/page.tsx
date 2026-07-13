@@ -1,0 +1,1 @@
+import { AdminUsersScreen } from "@/components/admin/dashboard-users"; import { marketplacePageShell } from "@/components/marketplace/page-shell"; export default function Page({params}:{params:Promise<{locale:string}>}){return marketplacePageShell(params,(locale,dictionary)=><AdminUsersScreen locale={locale} dictionary={dictionary}/>);}
